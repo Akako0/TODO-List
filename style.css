@@ -1,0 +1,344 @@
+/* Browser style reset */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: -webkit-linear-gradient(
+    -50deg,
+    #171722 10%,
+    #4e344d 40%,
+    #965165 52%,
+    #d67867 70%,
+    #fab261 94%,
+    #f9f871 150%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#branches {
+  padding: 15px;
+  background-color: #1717229f;
+  height: 90%;
+  width: 60%;
+  border-radius: 20px;
+  max-width: 1800px;
+}
+#branches h1 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+#branches > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#branches > header button {
+  background-color: transparent;
+  border: 2px solid #5becc0;
+  border-radius: 10px;
+  color: #5becc0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+#branches > header button:hover {
+  background-color: #5becc0;
+  color: #000;
+}
+#branches > header input[type="text"] {
+  width: 50%;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #fff;
+  background-color: #17102044;
+  transition: all 0.5s ease-in-out;
+}
+
+.branch-item {
+  background-color: #17102044;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.branch-item header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.branch-item > header > h2 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.branch-item .todo {
+  display: none;
+}
+
+.branch-item > header > button.delete-branch {
+  background-color: transparent;
+  border: 2px solid #d67867;
+  border-radius: 10px;
+  color: #d67867;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.branch-item > header > button.delete-branch:hover {
+  background-color: #d67867;
+  color: #fff;
+}
+
+.branch-item.expanded > header {
+  margin-bottom: 15px;
+}
+.branch-item.expanded .todo {
+  display: block;
+}
+.todo > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todo > header > input[type="text"] {
+  width: 80%;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #fff;
+  background-color: #17102044;
+  transition: all 0.5s ease-in-out;
+}
+
+.todo > header > button {
+  background-color: transparent;
+  border: 2px solid #5becc0;
+  border-radius: 10px;
+  color: #5becc0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.todo > header > button:hover {
+  background-color: #5becc0;
+  color: #171722;
+}
+
+.todo > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo > ul > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todo-item .left {
+  display: flex;
+  align-items: center;
+}
+
+.todo-item .left > label {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.todo-item .left > input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  transition: all 0.5s ease-in-out;
+}
+
+.todo-item .left > input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+  color: #5becc0;
+}
+
+.todo-item .delete-todo {
+  background-color: transparent;
+  border: 2px solid #d67867;
+  border-radius: 10px;
+  color: #d67867;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.todo-item .delete-todo:hover {
+  background-color: #d67867;
+  color: #fff;
+}
+
+input[type="text"]::placeholder {
+  color: #4e344d;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.git {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+}
+.git a {
+  color: #fff;
+}
