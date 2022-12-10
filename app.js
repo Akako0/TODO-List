@@ -69,7 +69,7 @@ const createBranch = (branch) => {
     branchName.textContent = branch.name;
     const deleteBranchButton = document.createElement("button");
     deleteBranchButton.classList.add("btn", "delete-branch");
-    deleteBranchButton.textContent = "Delete Branch";
+    deleteBranchButton.textContent = "Delete";
     branchHeader.appendChild(branchName);
     branchHeader.appendChild(deleteBranchButton);
     branchItem.appendChild(branchHeader);
@@ -82,7 +82,7 @@ const createBranch = (branch) => {
     todoName.setAttribute("placeholder", "Todo Name");
     const createTodoButton = document.createElement("button");
     createTodoButton.classList.add("create-todo");
-    createTodoButton.textContent = "Create Todo";
+    createTodoButton.textContent = "New";
     todoHeader.appendChild(todoName);
     todoHeader.appendChild(createTodoButton);
     todo.appendChild(todoHeader);
@@ -102,7 +102,6 @@ const createTodo = (todo) => {
     const checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("name", "todo");
-    checkbox.setAttribute("id", "todo");
     const label = document.createElement("label");
     label.setAttribute("for", "todo");
     label.textContent = todo.name;
@@ -111,24 +110,10 @@ const createTodo = (todo) => {
     todoItem.appendChild(left);
     const deleteTodoButton = document.createElement("button");
     deleteTodoButton.classList.add("btn", "delete-todo");
-    deleteTodoButton.textContent = "Delete Todo";
+    deleteTodoButton.textContent = "Delete";
     todoItem.appendChild(deleteTodoButton);
     return todoItem;
 }
-
-// event listener to create a branch
-
-createBranchButton.addEventListener("click", () => {
-    const branch = {
-        name: branchName.value,
-    };
-    if (branch.name === "") {
-        return;
-    }
-    const branchItem = createBranch(branch);
-    branchList.appendChild(branchItem);
-    branchName.value = "";
-});
 
 const save = () => {
     const branchItems = document.querySelectorAll(".branch-item");
@@ -136,19 +121,18 @@ const save = () => {
     branchItems.forEach((branchItem) => {
         const branchName = branchItem.querySelector(".branch-name").textContent;
         const todoItems = branchItem.querySelectorAll(".todo-item");
-        const todos = [];
+        const todos = {};
         todoItems.forEach((todoItem) => {
             const todoName = todoItem.querySelector("label").textContent;
-            const todo = {
-                name: todoName,
-            };
-            todos.push(todo);
+            const isCompleted = todoItem.querySelector("input").checked;
+            todos[todoName] = isCompleted;
         });
         const branch = {
             name: branchName,
             todos: todos,
         };
         branches.push(branch);
+        
     });
     localStorage.setItem("branches", JSON.stringify(branches));
 };
@@ -160,10 +144,15 @@ const load = () => {
             const branchItem = createBranch(branch);
             branchList.appendChild(branchItem);
             const todoList = branchItem.querySelector(".todo-list");
-            branch.todos.forEach((todo) => {
-                const todoItem = createTodo(todo);
+            for (const todo in branch.todos) {
+                const todoItem = createTodo({
+                    name: todo,
+                });
+                if (branch.todos[todo]) {
+                    todoItem.querySelector("input").checked = true;
+                }
                 todoList.appendChild(todoItem);
-            });
+            }
         });
     }
     else {
@@ -182,7 +171,21 @@ const load = () => {
 
 };
 
+// event listener to create a branch
+createBranchButton.addEventListener("click", () => {
+    const branch = {
+        name: branchName.value,
+    };
+    if (branch.name === "") {
+        return;
+    }
+    const branchItem = createBranch(branch);
+    branchList.appendChild(branchItem);
+    branchName.value = "";
+    save();
+});
 
+// event listener to delete a branch
 branchesContainer.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-branch")) {
         //ask for confirmation
@@ -200,6 +203,7 @@ branchesContainer.addEventListener("click", (e) => {
     }
 });
 
+// event listener to edit branch name
 branchesContainer.addEventListener("dblclick", (e) => {
     if (e.target.classList.contains("branch-name")) {
         e.target.contentEditable = true;
@@ -210,12 +214,16 @@ branchesContainer.addEventListener("dblclick", (e) => {
             e.target.contentEditable = false;
             save();
         });
+        e.target.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                e.target.blur();
+            }
+        });
     }
 });
-
 onload = load();
 
-//create todo
+//event listener to create todo
 branchesContainer.addEventListener("click", (e) => {
     if (e.target.classList.contains("create-todo") && e.target.parentElement.querySelector(".todo-name").value !== "") {
         const todoName = e.target.parentElement.querySelector(".todo-name").value;
@@ -231,7 +239,7 @@ branchesContainer.addEventListener("click", (e) => {
 }
 );
 
-//delete todo
+//event listener to delete todo
 branchesContainer.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-todo")) {
         //ask confirmation 
@@ -245,4 +253,35 @@ branchesContainer.addEventListener("click", (e) => {
     }
 }
 );
+//event listener to edit todo name
+branchesContainer.addEventListener("dblclick", (e) => {
+    if (e.target.tagName === "LABEL") {
+        e.target.contentEditable = true;
+        e.target.focus();
+        //listen for unfocus on todo name
+        e.target.addEventListener("blur", () => {
+            e.target.textContent = e.target.textContent.split("\n")[0];
+            e.target.contentEditable = false;
+            save();
+        });
+        //listen for enter key
+        e.target.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                e.target.blur();
+            }
+        });
+    }
+});
 
+branchName.addEventListener("keypress", (e) => {
+    if (e.key === "Enter" && branchName.value !== "") {
+        createBranchButton.click();
+    }
+});
+
+//event listener to create todo on enter key
+branchesContainer.addEventListener("keypress", (e) => {
+    if (e.key === "Enter" && e.target.classList.contains("todo-name")) {
+        e.target.parentElement.querySelector(".create-todo").click();
+    }
+});

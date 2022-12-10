@@ -129,25 +129,14 @@ body {
   place-items: center;
   width: 100vw;
   height: 100vh;
-  background: -webkit-linear-gradient(
-    -50deg,
-    #171722 10%,
-    #4e344d 40%,
-    #965165 52%,
-    #d67867 70%,
-    #fab261 94%,
-    #f9f871 150%
-  );
+  background: -webkit-linear-gradient(-30deg, #161622 70%, #13131d 70%);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
 #branches {
-  padding: 15px;
-  background-color: #1717229f;
   height: 90%;
   width: 60%;
-  border-radius: 20px;
   max-width: 1800px;
 }
 #branches h1 {
@@ -157,6 +146,9 @@ body {
   margin-bottom: 20px;
 }
 #branches > header {
+  padding: 15px;
+  background-color: #1a1a27;
+  border-radius: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -172,24 +164,31 @@ body {
   cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
+
 #branches > header button:hover {
   background-color: #5becc0;
   color: #000;
 }
+input[type="text"]::placeholder {
+  color: #2e5246;
+  font-size: 1rem;
+  font-weight: 400;
+}
 #branches > header input[type="text"] {
   width: 50%;
   border-radius: 10px;
-  border: none;
+  padding: 5px;
+  border: 1px solid #2e5246;
   outline: none;
   font-size: 1.2rem;
   font-weight: 400;
   color: #fff;
-  background-color: #17102044;
+  background-color: #171722;
   transition: all 0.5s ease-in-out;
 }
 
 .branch-item {
-  background-color: #17102044;
+  background-color: #1a1a27;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
@@ -233,6 +232,9 @@ body {
 .branch-item.expanded .todo {
   display: block;
 }
+.branch-item.expanded .delete-branch {
+  display: none;
+}
 .todo > header {
   display: flex;
   justify-content: space-between;
@@ -243,12 +245,13 @@ body {
 .todo > header > input[type="text"] {
   width: 80%;
   border-radius: 10px;
-  border: none;
+  padding: 5px;
+  border: 1px solid #2e5246;
   outline: none;
   font-size: 1rem;
   font-weight: 400;
   color: #fff;
-  background-color: #17102044;
+  background-color: #171722;
   transition: all 0.5s ease-in-out;
 }
 
@@ -297,7 +300,6 @@ body {
   color: #fff;
   font-size: 1.2rem;
   font-weight: 600;
-  cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
 .todo-item .left > input[type="checkbox"] {
@@ -311,7 +313,9 @@ body {
   text-decoration: line-through;
   color: #5becc0;
 }
-
+.create-todo {
+  width: 4rem;
+}
 .todo-item .delete-todo {
   background-color: transparent;
   border: 2px solid #d67867;
@@ -325,12 +329,6 @@ body {
 .todo-item .delete-todo:hover {
   background-color: #d67867;
   color: #fff;
-}
-
-input[type="text"]::placeholder {
-  color: #4e344d;
-  font-size: 1rem;
-  font-weight: 400;
 }
 
 .git {
