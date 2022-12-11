@@ -124,12 +124,23 @@ table {
   border-spacing: 0;
 }
 
+/* End of reset */
+:root {
+  --accent: #5becc0;
+  --sec-accent: #d67867;
+  --acent-font: #000;
+  --bg: #171722;
+  --bg-500: #1a1a27;
+  --bg-400: #222231;
+}
 body {
   display: grid;
   place-items: center;
-  width: 100vw;
   height: 100vh;
-  background: -webkit-linear-gradient(-30deg, #161622 70%, #13131d 70%);
+  width: 100vw;
+  background: -webkit-linear-gradient(110deg, var(--bg) 70%, var(--bg-500) 70%);
+  background: -moz-linear-gradient(110deg, var(--bg) 70%, var(--bg-500) 70%);
+  background: linear-gradient(110deg, var(--bg) 70%, var(--bg-500) 70%);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -139,15 +150,10 @@ body {
   width: 60%;
   max-width: 1800px;
 }
-#branches h1 {
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
+
 #branches > header {
   padding: 15px;
-  background-color: #1a1a27;
+  background-color: var(--bg-400);
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
@@ -156,19 +162,19 @@ body {
 }
 #branches > header button {
   background-color: transparent;
-  border: 2px solid #5becc0;
+  border: 2px solid var(--accent);
   border-radius: 10px;
-  color: #5becc0;
-  font-size: 1.5rem;
+  color: var(--accent);
+  font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
-
 #branches > header button:hover {
-  background-color: #5becc0;
-  color: #000;
+  background-color: var(--accent);
+  color: var(--acent-font);
 }
+
 input[type="text"]::placeholder {
   color: #2e5246;
   font-size: 1rem;
@@ -186,126 +192,131 @@ input[type="text"]::placeholder {
   background-color: #171722;
   transition: all 0.5s ease-in-out;
 }
-
-.branch-item {
-  background-color: #1a1a27;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
+#branches > header input[type="text"]:focus {
+  border: 1px solid var(--accent);
+  background-color: var(--bg-500);
 }
 
+.branch-item {
+  background-color: var(--bg-400);
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
 .branch-item header {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  align-items: center;
 }
-
-.branch-item > header > h2 {
-  color: #fff;
+.branch-item header h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-right: 10px;
+  color: #fff;
 }
-
-.branch-item .todo {
-  display: none;
-}
-
-.branch-item > header > button.delete-branch {
+.branch-item header button {
   background-color: transparent;
-  border: 2px solid #d67867;
+  border: 2px solid var(--sec-accent);
   border-radius: 10px;
-  color: #d67867;
-  font-size: 1.3rem;
+  color: var(--sec-accent);
+  font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
-.branch-item > header > button.delete-branch:hover {
-  background-color: #d67867;
-  color: #fff;
+.branch-item header button:hover {
+  background-color: var(--sec-accent);
+  color: var(--acent-font);
 }
-
-.branch-item.expanded > header {
-  margin-bottom: 15px;
+.branch-item .todo {
+  display: none;
+}
+.branch-item.expanded header button {
+  display: none;
+}
+.branch-item.expanded header {
+  margin-bottom: 20px;
 }
 .branch-item.expanded .todo {
   display: block;
 }
-.branch-item.expanded .delete-branch {
-  display: none;
-}
-.todo > header {
+.todo header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
-
-.todo > header > input[type="text"] {
-  width: 80%;
+.todo header input[type="text"] {
+  width: 50%;
   border-radius: 10px;
   padding: 5px;
   border: 1px solid #2e5246;
   outline: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 400;
   color: #fff;
   background-color: #171722;
   transition: all 0.5s ease-in-out;
 }
 
-.todo > header > button {
+.todo header input[type="text"]:focus {
+  border: 1px solid var(--accent);
+  background-color: var(--bg-500);
+}
+
+.todo header button {
+  width: 4rem;
   background-color: transparent;
-  border: 2px solid #5becc0;
+  border: 2px solid var(--accent);
   border-radius: 10px;
-  color: #5becc0;
+  color: var(--accent);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
 
-.todo > header > button:hover {
-  background-color: #5becc0;
-  color: #171722;
+.todo header button:hover {
+  background-color: var(--accent);
+  color: var(--acent-font);
 }
 
-.todo > ul {
+.todo .todo-item {
+  background-color: var(--bg-500);
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+.todo ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-.todo > ul > li {
+.todo ul li .todo-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
-
-.todo-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
 .todo-item .left {
   display: flex;
   align-items: center;
 }
-
-.todo-item .left > label {
-  color: #fff;
+.todo-item .left label {
+  margin-left: 10px;
   font-size: 1.2rem;
-  font-weight: 600;
-  transition: all 0.5s ease-in-out;
-}
-.todo-item .left > input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+  font-weight: 400;
+  color: #fff;
   transition: all 0.5s ease-in-out;
 }
 
@@ -313,30 +324,29 @@ input[type="text"]::placeholder {
   text-decoration: line-through;
   color: #5becc0;
 }
-.create-todo {
-  width: 4rem;
-}
+
 .todo-item .delete-todo {
   background-color: transparent;
-  border: 2px solid #d67867;
+  border: 2px solid var(--sec-accent);
   border-radius: 10px;
-  color: #d67867;
+  color: var(--sec-accent);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
+
 .todo-item .delete-todo:hover {
-  background-color: #d67867;
-  color: #fff;
+  background-color: var(--sec-accent);
+  color: var(--acent-font);
 }
 
 .git {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 999;
+  top: 0;
+  left: 0;
 }
+
 .git a {
   color: #fff;
 }

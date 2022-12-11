@@ -1,54 +1,3 @@
-//this is a TODO APP
-
-/*
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>TODO</title>
-  </head>
-  <body>
-    <!-- List of branches -->
-    <div id="branches">
-      <header>
-        <h1>Branches</h1>
-        <input type="text" name="" id="branch-name" />
-        <button class="create-branch">Create branch</button>
-      </header>
-      <ul class="branch-list">
-        <li class="branch-item">
-          <header class="branch-header">
-            <h2 class="branch-name">Branch 1</h2>
-            <button class="btn delete-branch">Delete Branch</button>
-          </header>
-
-          <div class="todo">
-            <header>
-              <input type="text" name="" class="todo-name" id="" />
-              <button class="create-todo">Create todo</button>
-            </header>
-            <ul class="todo-list">
-              <li class="todo-item">
-                <div class="left">
-                  <input type="checkbox" name="todo" id="todo" />
-                  <label for="todo">Todo 1</label>
-                </div>
-                <button class="btn delete-todo">Delete Todo</button>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <script src="app.js"></script>
-  </body>
-</html>
-
-*/
-
 const branchesContainer = document.getElementById("branches");
 const branchName = document.getElementById("branch-name");
 const createBranchButton = document.querySelector(".create-branch");
@@ -182,7 +131,6 @@ createBranchButton.addEventListener("click", () => {
     const branchItem = createBranch(branch);
     branchList.appendChild(branchItem);
     branchName.value = "";
-    save();
 });
 
 // event listener to delete a branch
@@ -195,7 +143,6 @@ branchesContainer.addEventListener("click", (e) => {
         }
         //delete branch
         e.target.parentElement.parentElement.remove();
-        save();
     }
     //toggle expand
     if (e.target.classList.contains("branch-header")) {
@@ -212,7 +159,6 @@ branchesContainer.addEventListener("dblclick", (e) => {
         e.target.addEventListener("blur", () => {
             e.target.textContent = e.target.textContent.split("\n")[0];
             e.target.contentEditable = false;
-            save();
         });
         e.target.addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
@@ -234,7 +180,6 @@ branchesContainer.addEventListener("click", (e) => {
         const todoList = e.target.parentElement.parentElement.querySelector(".todo-list");
         todoList.appendChild(todoItem);
         e.target.parentElement.querySelector(".todo-name").value = "";
-        save();
     }
 }
 );
@@ -249,7 +194,6 @@ branchesContainer.addEventListener("click", (e) => {
         }
         //delete todo    
         e.target.parentElement.remove();
-        save();
     }
 }
 );
@@ -262,7 +206,6 @@ branchesContainer.addEventListener("dblclick", (e) => {
         e.target.addEventListener("blur", () => {
             e.target.textContent = e.target.textContent.split("\n")[0];
             e.target.contentEditable = false;
-            save();
         });
         //listen for enter key
         e.target.addEventListener("keypress", (e) => {
@@ -284,4 +227,9 @@ branchesContainer.addEventListener("keypress", (e) => {
     if (e.key === "Enter" && e.target.classList.contains("todo-name")) {
         e.target.parentElement.querySelector(".create-todo").click();
     }
+});
+
+//event listener to save on window close
+window.addEventListener("beforeunload", () => {
+    save();
 });
